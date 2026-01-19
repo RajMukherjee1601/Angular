@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:parceldb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    # For demo only. In production, store this securely and rotate.
+    secret: "ChangeMeToAStrongSecretKeyAtLeast32CharsLong"
+    expirationMinutes: 240
+
+logging:
+  level:
+    org.hibernate.SQL: warn

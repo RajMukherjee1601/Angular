@@ -1,0 +1,39 @@
+<div class="container py-4">
+  <div class="d-flex align-items-center justify-content-between">
+    <h3>Previous Bookings</h3>
+    <button class="btn btn-outline-secondary btn-sm" (click)="exportCsv()">Export CSV</button>
+  </div>
+
+  <div class="alert alert-danger mt-3" *ngIf="error">{{error}}</div>
+
+  <table class="table table-striped mt-3" *ngIf="bookings.length">
+    <thead>
+      <tr>
+        <th>Booking ID</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of bookings">
+        <td>{{b.bookingId}}</td>
+        <td>{{b.status}}</td>
+        <td>{{b.totalCost}}</td>
+        <td>{{b.createdAt | date:'medium'}}</td>
+        <td>
+          <a class="btn btn-sm btn-outline-primary" [routerLink]="['/customer/track']" [queryParams]="{id: b.bookingId}">Track</a>
+          <a class="btn btn-sm btn-outline-success ms-2" [routerLink]="['/customer/feedback', b.bookingId]">Feedback</a>
+          <a class="btn btn-sm btn-outline-danger ms-2" [routerLink]="['/customer/cancel', b.bookingId]">Cancel</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex gap-2" *ngIf="totalPages > 1">
+    <button class="btn btn-outline-secondary btn-sm" (click)="load(page-1)" [disabled]="page===0">Prev</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="load(page+1)" [disabled]="page+1>=totalPages">Next</button>
+    <span class="text-muted">Page {{page+1}} / {{totalPages}}</span>
+  </div>
+</div>

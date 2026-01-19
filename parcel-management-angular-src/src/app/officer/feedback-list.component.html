@@ -1,0 +1,32 @@
+<div class="container py-4">
+  <h3>Customer Feedback</h3>
+
+  <div class="alert alert-danger mt-3" *ngIf="error">{{error}}</div>
+
+  <table class="table table-striped mt-3" *ngIf="items.length">
+    <thead>
+      <tr>
+        <th>Booking ID</th>
+        <th>Customer</th>
+        <th>Rating</th>
+        <th>Comments</th>
+        <th>Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let f of items">
+        <td>{{f.booking?.bookingId}}</td>
+        <td>{{f.customer?.email}}</td>
+        <td>{{f.rating}}</td>
+        <td>{{f.comments}}</td>
+        <td>{{f.createdAt | date:'medium'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex gap-2" *ngIf="totalPages > 1">
+    <button class="btn btn-outline-secondary btn-sm" (click)="load(page-1)" [disabled]="page===0">Prev</button>
+    <button class="btn btn-outline-secondary btn-sm" (click)="load(page+1)" [disabled]="page+1>=totalPages">Next</button>
+    <span class="text-muted">Page {{page+1}} / {{totalPages}}</span>
+  </div>
+</div>

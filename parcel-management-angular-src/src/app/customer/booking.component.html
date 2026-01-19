@@ -1,0 +1,59 @@
+<div class="container py-4">
+  <h3>Customer Booking</h3>
+  <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+
+  <form class="row g-3" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="col-md-6">
+      <label class="form-label">Sender Name</label>
+      <input class="form-control" formControlName="senderName" />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Sender Phone</label>
+      <input class="form-control" formControlName="senderPhone" />
+    </div>
+    <div class="col-12">
+      <label class="form-label">Sender Address</label>
+      <input class="form-control" formControlName="senderAddress" />
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label">Receiver Name</label>
+      <input class="form-control" formControlName="receiverName" />
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Receiver Phone</label>
+      <input class="form-control" formControlName="receiverPhone" />
+    </div>
+    <div class="col-12">
+      <label class="form-label">Receiver Address</label>
+      <input class="form-control" formControlName="receiverAddress" />
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Parcel Type</label>
+      <select class="form-select" formControlName="parcelType">
+        <option value="BOX">BOX</option>
+        <option value="DOCUMENT">DOCUMENT</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Weight (kg)</label>
+      <input type="number" class="form-control" formControlName="weightKg" />
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Distance (km)</label>
+      <input type="number" class="form-control" formControlName="distanceKm" />
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Contents</label>
+      <input class="form-control" formControlName="contents" />
+    </div>
+
+    <div class="col-12">
+      <button class="btn btn-primary" [disabled]="loading || form.invalid">
+        {{loading ? 'Creating...' : 'Create Booking'}}
+      </button>
+    </div>
+  </form>
+</div>
